@@ -1,0 +1,22 @@
+name: Update last-updated date
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Stamp today's date into the footer
+        run: |
+          TODAY=$(date +"%B %d, %Y")
+          sed -i "s/Last updated: .*<\/span>/Last updated: $TODAY<\/span>/" index.html
+
+      - name: Save the change back to the repo
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update last updated date"
