@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louie Lumbao — Administrative &amp; Automation Partner</title>
+<meta name="description" content="Louie Lumbao, administrative and automation partner for growing businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --ink-soft:#4A5568;
+    --paper:#F6F5F1;
+    --paper-raised:#FFFFFF;
+    --teal:#2F6F62;
+    --teal-deep:#1E4A41;
+    --gold:#B8912B;
+    --line:#DAD7CD;
+    --radius:2px;
+  }
 
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  ::selection{background:var(--teal);color:var(--paper);}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(246,245,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:920px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.02em;
+  }
+  .mark span{color:var(--teal);}
+  nav.links{display:flex;gap:28px;}
+  nav.links a{
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  nav.links a:hover, nav.links a:focus-visible{
+    color:var(--teal-deep);
+    border-color:var(--teal);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;
+    height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  h1.headline{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(38px, 6vw, 64px);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    max-width:14ch;
+  }
+  h1.headline em{
+    font-style:italic;
+    color:var(--teal);
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:52ch;
+    font-size:18px;
+    color:var(--ink-soft);
+  }
+
+  /* signature block — the signature element of the design */
+  .sign-block{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    max-width:640px;
+  }
+  .sign{
+    padding-top:14px;
+    border-top:1px solid var(--ink);
+  }
+  .sign .role{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .sign .name{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:22px;
+    color:var(--ink);
+  }
+  .sign .name.you{
+    color:var(--teal-deep);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:40px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:0.08em;
+  }
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:30px;
+    letter-spacing:-0.005em;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about-grid p{
+    margin-bottom:18px;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  .about-grid p strong{color:var(--ink);font-weight:600;}
+
+  .stat-ledger{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+  }
+  .stat-row{
+    display:flex;
+    justify-content:space-between;
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+  }
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row .label{color:var(--ink-soft);letter-spacing:0.02em;}
+  .stat-row .value{color:var(--teal-deep);font-weight:500;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+  }
+  .skill-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:26px 24px;
+  }
+  .skill-card h3{
+    font-family:'Fraunces',serif;
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:14px;
+    color:var(--teal-deep);
+  }
+  .skill-card ul{list-style:none;}
+  .skill-card li{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    padding:6px 0 6px 18px;
+    position:relative;
+    border-top:1px solid var(--line);
+  }
+  .skill-card li:first-child{border-top:none;}
+  .skill-card li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--gold);
+  }
+  .badge-progress{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    background:rgba(47,111,98,0.1);
+    padding:3px 8px;
+    margin-top:14px;
+    border:1px solid rgba(47,111,98,0.3);
+  }
+
+  /* ---------- EXPERIENCE (ledger timeline) ---------- */
+  .role{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:28px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .role:first-child{border-top:none;}
+  .role .dates{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--gold);
+    letter-spacing:0.02em;
+    padding-top:3px;
+  }
+  .role h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:19px;
+    margin-bottom:2px;
+  }
+  .role .org{
+    font-size:14px;
+    color:var(--teal-deep);
+    margin-bottom:12px;
+  }
+  .role ul{list-style:none;}
+  .role li{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    padding:5px 0 5px 16px;
+    position:relative;
+  }
+  .role li::before{
+    content:"·";
+    position:absolute;
+    left:0;
+    color:var(--gold);
+    font-weight:700;
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .edu-card{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    padding:24px;
+  }
+  .edu-card .dates{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+  }
+  .edu-card h3{
+    font-family:'Fraunces',serif;
+    font-size:17px;
+    font-weight:600;
+    margin:6px 0 10px;
+  }
+  .edu-card p{
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    text-align:left;
+  }
+  .contact h2.big{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(30px,4.5vw,44px);
+    max-width:16ch;
+    margin-bottom:22px;
+    line-height:1.15;
+  }
+  .contact h2.big em{font-style:italic;color:var(--teal);}
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:30px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    font-weight:500;
+    transition:background .2s ease;
+  }
+  .btn:hover{background:var(--teal-deep);}
+  .btn.ghost{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+  }
+  .btn.ghost:hover{
+    border-color:var(--teal-deep);
+    color:var(--teal-deep);
+    background:transparent;
+  }
+
+  footer{
+    padding:36px 0 48px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .sign-block{grid-template-columns:1fr;gap:26px;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .role{grid-template-columns:1fr;gap:8px;}
+    .edu{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="mark">Louie <span>Lumbao</span></div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-bottom:1px solid var(--line);padding-bottom:0;">
+    <div class="eyebrow">Administrative &amp; Automation Partner</div>
+    <h1 class="headline">Let's build this <em>together.</em></h1>
+    <p class="hero-sub">I handle the operations, communication, and workflows that keep a business running, and I'm building automation skills so those workflows run themselves. Eleven-plus years in corporate and client-facing operations, now applied to businesses that want a partner, not just a pair of hands.</p>
+
+    <div class="sign-block">
+      <div class="sign">
+        <div class="role">Client / Business</div>
+        <div class="name">&nbsp;</div>
+      </div>
+      <div class="sign">
+        <div class="role">Partner</div>
+        <div class="name you">Louie Lumbao</div>
+      </div>
+    </div>
+    <div style="height:88px;"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I spent over a decade inside corporate and BPO operations in the Philippines, most recently coordinating pharmaceutical meetings, vendor logistics, and contract review for senior leaders at <strong>IQVIA</strong>, and before that, auditing quality on live customer interactions at <strong>Concentrix</strong>. That background taught me two things: how to keep complex, detail-heavy work accurate under deadline, and what "quality before quantity" actually looks like in practice.</p>
+        <p>I hold a <strong>BS in Entrepreneurship</strong> from Quezon City University, which shaped how I think about client work: not as a stack of tasks to complete, but as a business relationship to help grow. That's the lens I bring into freelancing. I'm not looking for someone to manage me. I'm looking for a business I can help run better, as a partner with a stake in the outcome.</p>
+        <p>I'm currently deepening my skills in AI and workflow automation, learning to build the backend systems that let a small business or solo founder save hours every week. It's early, and I'm upfront about that, but it's the direction I'm building toward.</p>
+      </div>
+      <div class="stat-ledger">
+        <div class="stat-row"><span class="label">Experience</span><span class="value">11+ yrs</span></div>
+        <div class="stat-row"><span class="label">Industries</span><span class="value">Corporate / BPO</span></div>
+        <div class="stat-row"><span class="label">Degree</span><span class="value">BS Entrepreneurship</span></div>
+        <div class="stat-row"><span class="label">Based in</span><span class="value">Quezon City, PH</span></div>
+        <div class="stat-row"><span class="label">Currently building</span><span class="value">Automation skills</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Core Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Executive &amp; Administrative Support</h3>
+        <ul>
+          <li>Calendar &amp; meeting coordination</li>
+          <li>Document processing &amp; filing systems</li>
+          <li>Contract review</li>
+          <li>Vendor &amp; stakeholder liaison</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Client Relations &amp; Quality</h3>
+        <ul>
+          <li>Complaint resolution</li>
+          <li>Quality auditing</li>
+          <li>Performance analysis</li>
+          <li>Customer support (chat, phone, email)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Tools &amp; Systems</h3>
+        <ul>
+          <li>Microsoft Office (Word, Excel, PowerPoint)</li>
+          <li>Zendesk</li>
+          <li>Salesforce CRM</li>
+          <li>Shopify (familiar, growing hands-on experience)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Automation &amp; Backend</h3>
+        <ul>
+          <li>Workflow automation fundamentals</li>
+          <li>API &amp; systems thinking</li>
+          <li>Website basics (HTML/CSS)</li>
+        </ul>
+        <span class="badge-progress">Actively learning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="role">
+      <div class="dates">2018 — 2026</div>
+      <div>
+        <h3>Client Associate Representative</h3>
+        <div class="org">IQVIA Philippines</div>
+        <ul>
+          <li>Handled end-to-end coordination of pharmaceutical meetings, including request approvals, venue coordination, and document follow-ups</li>
+          <li>Ensured accurate, compliant event execution by liaising with internal and external stakeholders</li>
+          <li>Provided administrative support to senior leaders with minimal supervision</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="dates">2016 — 2018</div>
+      <div>
+        <h3>Quality Analyst, Project Wheelz</h3>
+        <div class="org">Concentrix Daksh Service</div>
+        <ul>
+          <li>Performed quality audits on customer calls and emails against service standards</li>
+          <li>Analyzed team performance metrics to identify process improvements</li>
+          <li>Supported customer service operations to maintain high satisfaction</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="dates">2014 — 2015</div>
+      <div>
+        <h3>Customer Service Representative</h3>
+        <div class="org">One World Connection Inc.</div>
+        <ul>
+          <li>Resolved customer complaints through timely solutions and consistent follow-up</li>
+          <li>Conducted outbound survey calls to collect accurate residential data</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu">
+      <div class="edu-card">
+        <div class="dates">2021 — 2026 · Graduate</div>
+        <h3>BS in Entrepreneurship</h3>
+        <p>Quezon City University. Hands-on coursework in venture creation, business planning, market research, and product innovation, with proficiency in operations management, digital marketing, sales forecasting, and cash flow budgeting.</p>
+      </div>
+      <div class="edu-card">
+        <div class="dates">2012 — 2014 · Undergraduate</div>
+        <h3>BS in Business Management, Major in Operations</h3>
+        <p>STI College Fairview. 60+ credit units covering financial accounting, journal entry logging, financial statement analysis, and administrative office operations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact reveal">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Contact</h2>
+    </div>
+    <h2 class="big">Have work that needs a <em>partner,</em> not just a pair of hands?</h2>
+    <p style="color:var(--ink-soft);max-width:52ch;">I'm currently taking on part-time client work while I grow into the automation side of the business. Reach out and let's discuss how we can streamline and optimize your day-to-day operations.</p>
+    <div class="contact-links">
+      <a class="btn" href="mailto:lumbaolouiegie@outlook.com">Email me →</a>
+      
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Louie Lumbao</span>
+  <span>Quezon City, Philippines</span>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
