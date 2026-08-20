@@ -28,7 +28,18 @@
     const db = getFirestore(app);
 
     document.getElementById("feedback-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  e.preventDefault();
+
+  const token = await grecaptcha.execute("YOUR_SITE_KEY", { action: "submit_review" });
+  // token is a score-based signal Google generates; low scores usually mean a bot.
+  // Full verification requires sending this token to a server, which you don't have —
+  // so treat this as a soft deterrent unless you later add a small serverless
+  // function (e.g. a free Firebase Cloud Function) to verify the token server-side.
+
+  const name = document.getElementById("name").value.trim();
+  const feedback = document.getElementById("feedback").value.trim();
+  // ...rest of the existing submit logic stays the same
+      
       const name = document.getElementById("name").value.trim();
       const feedback = document.getElementById("feedback").value.trim();
       const status = document.getElementById("status");
