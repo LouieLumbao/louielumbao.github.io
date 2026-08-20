@@ -257,8 +257,72 @@
     border:1px solid rgba(47,111,98,0.3);
   }
 
-
-  
+  /* ---------- REVIEWS ---------- */
+  .reviews-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--gold);
+    background:rgba(184,145,43,0.08);
+    border:1px dashed rgba(184,145,43,0.5);
+    padding:10px 16px;
+    margin-bottom:32px;
+    max-width:60ch;
+  }
+  .reviews-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+  }
+  .review-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:28px 26px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .review-quote{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:17px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .review-quote::before{
+    content:"“";
+    color:var(--teal);
+  }
+  .review-quote::after{
+    content:"”";
+    color:var(--teal);
+  }
+  .review-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .review-person .name{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .review-person .role{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .review-stars{
+    font-size:14px;
+    color:var(--gold);
+    letter-spacing:2px;
+  }
 
   /* ---------- CONTACT ---------- */
   .contact{
@@ -334,6 +398,7 @@
     .sign-block{grid-template-columns:1fr;gap:26px;}
     .about-grid{grid-template-columns:1fr;}
     .skills-grid{grid-template-columns:1fr;}
+    .reviews-grid{grid-template-columns:1fr;}
     .role{grid-template-columns:1fr;gap:8px;}
     .edu{grid-template-columns:1fr;}
     footer{flex-direction:column;gap:6px;}
@@ -348,6 +413,7 @@
     <nav class="links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
+      <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -432,9 +498,13 @@
     </div>
   </section>
 
-  
+  <!-- REVIEWS -->
+  <section id="reviews">
+  <h2>Client Reviews</h2>
+  <a href="feedback.html" class="btn">Leave me a feedback</a>
+  <div id="reviews-list"><!-- reviews render here --></div>
+</section>
 
-  
   <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <div class="section-head">
