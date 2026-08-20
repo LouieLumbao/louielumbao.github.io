@@ -505,6 +505,35 @@
   <div id="reviews-list"><!-- reviews render here --></div>
 </section>
 
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, query, orderBy, onSnapshot }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // same config as feedback.html
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const reviewsList = document.getElementById("reviews-list");
+  const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+
+  // onSnapshot = real-time listener. Any new review appears instantly
+  // for every visitor currently on the page, no refresh needed.
+  onSnapshot(q, (snapshot) => {
+    reviewsList.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const r = doc.data();
+      const card = document.createElement("div");
+      card.className = "review-card";
+      card.innerHTML = `<strong>${r.name}</strong><p>${r.feedback}</p>`;
+      reviewsList.appendChild(card);
+    });
+  });
+</script>
+
   <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <div class="section-head">
