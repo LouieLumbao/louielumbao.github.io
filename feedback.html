@@ -43,6 +43,7 @@ document.getElementById("feedback-form").addEventListener("submit", async (e) =>
     await addDoc(collection(db, "reviews"), {
       name,
       feedback,
+      approved: false,
       createdAt: serverTimestamp()
     });
     status.textContent = "Thank you! Your review has been submitted.";
