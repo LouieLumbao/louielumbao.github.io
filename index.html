@@ -318,10 +318,11 @@
     color:var(--ink-soft);
     margin-top:2px;
   }
-  .review-stars{
-    font-size:14px;
-    color:var(--gold);
-    letter-spacing:2px;
+  #reviews-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+    margin-top:32px;
   }
 
   /* ---------- CONTACT ---------- */
@@ -399,6 +400,7 @@
     .about-grid{grid-template-columns:1fr;}
     .skills-grid{grid-template-columns:1fr;}
     .reviews-grid{grid-template-columns:1fr;}
+    #reviews-list{grid-template-columns:1fr;}
     .role{grid-template-columns:1fr;gap:8px;}
     .edu{grid-template-columns:1fr;}
     footer{flex-direction:column;gap:6px;}
@@ -511,8 +513,16 @@
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
-    // same config as feedback.html
-  };
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDAznWF4QEsb1jq_CZnGZPAWSqogPFiiP4",
+  authDomain: "louie-portfolio-reviews.firebaseapp.com",
+  projectId: "louie-portfolio-reviews",
+  storageBucket: "louie-portfolio-reviews.firebasestorage.app",
+  messagingSenderId: "1074560856901",
+  appId: "1:1074560856901:web:ea57d1ec4cdb566038842c",
+  measurementId: "G-ZWWECRQ6FJ"
+};
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
