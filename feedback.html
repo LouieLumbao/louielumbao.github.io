@@ -160,6 +160,62 @@
     min-height:120px;
   }
 
+  /* Photo option selector */
+  .photo-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .photo-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .photo-option:hover{border-color:var(--teal);}
+  .photo-option input[type="radio"]{
+    margin-top:3px;
+    accent-color:var(--teal);
+  }
+  .photo-option .opt-text{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .photo-option .opt-title{
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .photo-option .opt-desc{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .photo-option.selected{
+    border-color:var(--teal);
+    background:rgba(47,111,98,0.05);
+  }
+
+  .photo-field{
+    display:none;
+    margin-top:8px;
+  }
+  .photo-field.active{display:block;}
+
+  #upload-preview{
+    margin-top:10px;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--line);
+    display:none;
+  }
+
   button{
     align-self:flex-start;
     display:inline-flex;
@@ -212,34 +268,85 @@
         <label for="name">Your Name</label>
         <input type="text" id="name" placeholder="e.g. Jane Cruz" required>
       </div>
+
+      <div>
+        <label>Your Photo (optional)</label>
+        <div class="photo-options">
+          <label class="photo-option selected" data-option="initials">
+            <input type="radio" name="photo-type" value="initials" checked>
+            <span class="opt-text">
+              <span class="opt-title">Use my initials</span>
+              <span class="opt-desc">A simple avatar made from the first letter of your name.</span>
+            </span>
+          </label>
+          <label class="photo-option" data-option="upload">
+            <input type="radio" name="photo-type" value="upload">
+            <span class="opt-text">
+              <span class="opt-title">Upload a photo</span>
+              <span class="opt-desc">Upload a picture straight from your device.</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="photo-field" id="field-upload">
+          <input type="file" id="photo-file" accept="image/*">
+          <img id="upload-preview" alt="Preview">
+        </div>
+      </div>
+
       <div>
         <label for="feedback">Your Review</label>
         <textarea id="feedback" placeholder="Tell me about your experience working together..." required></textarea>
       </div>
+
       <button type="submit" id="submit-btn">Submit Review →</button>
       <p id="status"></p>
     </form>
   </div>
 </main>
 
+<script>
+  // Toggle the upload field based on selected option
+  const photoOptions = document.querySelectorAll('.photo-option');
+  const fieldUpload = document.getElementById('field-upload');
+
+  photoOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      photoOptions.forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      const type = opt.dataset.option;
+      fieldUpload.classList.toggle('active', type === 'upload');
+    });
+  });
+
+  // Live preview for uploaded file
+  document.getElementById('photo-file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    const preview = document.getElementById('upload-preview');
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+</script>
+
 <!-- Firebase SDKs -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, addDoc, serverTimestamp }
     from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDAznWF4QEsb1jq_CZnGZPAWSqogPFiiP4",
-  authDomain: "louie-portfolio-reviews.firebaseapp.com",
-  projectId: "louie-portfolio-reviews",
-  storageBucket: "louie-portfolio-reviews.firebasestorage.app",
-  messagingSenderId: "1074560856901",
-  appId: "1:1074560856901:web:ea57d1ec4cdb566038842c",
-  measurementId: "G-ZWWECRQ6FJ"
-};
+  const firebaseConfig = {
+    // paste your real config here — same one already in index.html
+  };
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
   const form = document.getElementById("feedback-form");
   const submitBtn = document.getElementById("submit-btn");
@@ -258,18 +365,35 @@ const firebaseConfig = {
 
       const name = document.getElementById("name").value.trim();
       const feedback = document.getElementById("feedback").value.trim();
+      const photoType = document.querySelector('input[name="photo-type"]:checked').value;
 
-      await addDoc(collection(db, "reviews"), {
+      let photoUrl = "";
+
+      if (photoType === "upload") {
+        const file = document.getElementById("photo-file").files[0];
+        if (file) {
+          submitBtn.textContent = "Uploading photo...";
+          const fileRef = ref(storage, `reviews/${Date.now()}_${file.name}`);
+          await uploadBytes(fileRef, file);
+          photoUrl = await getDownloadURL(fileRef);
+        }
+      }
+      // if photoType === "initials", photoUrl stays "" and index.html
+      // falls back to rendering initials automatically.
+
+      const docData = {
         name,
         feedback,
         approved: false,
         createdAt: serverTimestamp()
-      });
+      };
+      if (photoUrl) docData.photoUrl = photoUrl;
 
-      // Redirect to the thank-you landing page on success
+      await addDoc(collection(db, "reviews"), docData);
+
       window.location.href = "thank-you-feedback.html";
     } catch (err) {
-      status.textContent = "Something went wrong. Please try again.";
+      status.textContent = "Something went wrong. If you tried uploading a photo, try the initials option instead and let the site owner know.";
       status.className = "error";
       console.error(err);
       submitBtn.disabled = false;
