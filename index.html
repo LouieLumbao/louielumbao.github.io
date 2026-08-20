@@ -507,8 +507,8 @@
 
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, query, orderBy, onSnapshot }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, query, where, orderBy, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     // same config as feedback.html
@@ -518,7 +518,11 @@
   const db = getFirestore(app);
 
   const reviewsList = document.getElementById("reviews-list");
-  const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+  const q = query(
+  collection(db, "reviews"),
+  where("approved", "==", true),
+  orderBy("createdAt", "desc")
+);
 
   // onSnapshot = real-time listener. Any new review appears instantly
   // for every visitor currently on the page, no refresh needed.
