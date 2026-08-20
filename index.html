@@ -221,6 +221,8 @@
     background:var(--paper-raised);
     border:1px solid var(--line);
     padding:26px 24px;
+    display:flex;
+    flex-direction:column;
   }
   .skill-card h3{
     font-family:'Fraunces',serif;
@@ -255,6 +257,75 @@
     padding:3px 8px;
     margin-top:14px;
     border:1px solid rgba(47,111,98,0.3);
+    align-self:flex-start;
+  }
+
+  /* ---------- CONNECTING NODE ANIMATION ---------- */
+  .workflow-diagram {
+    margin: 18px 0 6px;
+    padding: 16px 8px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .diagram-line-bg {
+    stroke: var(--line);
+    stroke-width: 2;
+    fill: none;
+  }
+  .diagram-line-flow {
+    stroke: var(--teal);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: flowPulse 4s infinite linear;
+  }
+  .flow-leg2 {
+    animation-delay: 1.8s;
+  }
+  .node-bg {
+    fill: var(--paper-raised);
+    stroke: var(--teal-deep);
+    stroke-width: 1.5;
+  }
+  .node-pulse-ring {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    opacity: 0;
+    transform-origin: center;
+    animation: pulseRing 4s infinite ease-out;
+  }
+  .node-1 .node-pulse-ring { animation-delay: 0s; }
+  .node-2 .node-pulse-ring { animation-delay: 1.6s; }
+  .node-3 .node-pulse-ring { animation-delay: 3.2s; }
+
+  .node-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.5px;
+    fill: var(--ink-soft);
+    text-anchor: middle;
+    letter-spacing: 0.05em;
+  }
+  .node-icon-text {
+    font-size: 11px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    fill: var(--teal-deep);
+    font-weight: 600;
+  }
+
+  @keyframes flowPulse {
+    0% { stroke-dashoffset: 100; opacity: 1; }
+    40% { stroke-dashoffset: 0; opacity: 1; }
+    70%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+
+  @keyframes pulseRing {
+    0% { transform: scale(0.7); opacity: 0.9; }
+    30% { transform: scale(1.35); opacity: 0; }
+    100% { opacity: 0; }
   }
 
   /* ---------- REVIEWS ---------- */
@@ -390,6 +461,7 @@
   }
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1;transform:none;transition:none;}
+    .diagram-line-flow, .node-pulse-ring { animation: none; stroke-dashoffset: 0; opacity: 1; }
     html{scroll-behavior:auto;}
   }
 
@@ -495,6 +567,41 @@
           <li>API &amp; systems thinking</li>
           <li>Website basics (HTML/CSS)</li>
         </ul>
+
+        <!-- SEQUENTIAL CONNECTING NODE DIAGRAM -->
+        <div class="workflow-diagram">
+          <svg viewBox="0 0 320 80" width="100%" height="auto">
+            <!-- Connection Lines -->
+            <path class="diagram-line-bg" d="M 50 32 L 160 32 L 270 32" />
+            <path class="diagram-line-flow flow-leg1" d="M 50 32 L 160 32" />
+            <path class="diagram-line-flow flow-leg2" d="M 160 32 L 270 32" />
+
+            <!-- Node 1: Input -->
+            <g class="node node-1">
+              <circle cx="50" cy="32" r="20" class="node-pulse-ring" />
+              <circle cx="50" cy="32" r="15" class="node-bg" />
+              <text x="50" y="32" class="node-icon-text">IN</text>
+              <text x="50" y="62" class="node-text">INPUT</text>
+            </g>
+
+            <!-- Node 2: Logic -->
+            <g class="node node-2">
+              <circle cx="160" cy="32" r="20" class="node-pulse-ring" />
+              <circle cx="160" cy="32" r="15" class="node-bg" />
+              <text x="160" y="32" class="node-icon-text">LOGIC</text>
+              <text x="160" y="62" class="node-text">PROCESS</text>
+            </g>
+
+            <!-- Node 3: Output -->
+            <g class="node node-3">
+              <circle cx="270" cy="32" r="20" class="node-pulse-ring" />
+              <circle cx="270" cy="32" r="15" class="node-bg" />
+              <text x="270" y="32" class="node-icon-text">OUT</text>
+              <text x="270" y="62" class="node-text">AUTOMATED</text>
+            </g>
+          </svg>
+        </div>
+
         <span class="badge-progress">Actively learning</span>
       </div>
     </div>
