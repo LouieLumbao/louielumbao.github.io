@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leave a Review</title>
+</head>
+<body>
+  <h1>Leave Me a Feedback</h1>
+  <form id="feedback-form">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <textarea id="feedback" placeholder="Your Review" required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+  <p id="status"></p>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      // paste your config from Step 1 here
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById("feedback-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const feedback = document.getElementById("feedback").value.trim();
+      const status = document.getElementById("status");
+
+      try {
+        await addDoc(collection(db, "reviews"), {
+          name,
+          feedback,
+          createdAt: serverTimestamp()
+        });
+        status.textContent = "Thank you! Your review has been submitted.";
+        e.target.reset();
+      } catch (err) {
+        status.textContent = "Something went wrong. Please try again.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
