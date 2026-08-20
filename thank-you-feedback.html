@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Ms. Louie Lumbao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --ink-soft:#4A5568;
+    --paper:#F6F5F1;
+    --paper-raised:#FFFFFF;
+    --teal:#2F6F62;
+    --teal-deep:#1E4A41;
+    --gold:#B8912B;
+    --line:#DAD7CD;
+    --radius:2px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  a{color:inherit;}
+
+  .card{
+    max-width:480px;
+    text-align:center;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:56px 44px;
+  }
+
+  .checkmark{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:rgba(47,111,98,0.1);
+    border:1px solid rgba(47,111,98,0.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 28px;
+    font-size:26px;
+    color:var(--teal-deep);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:"";
+    width:20px;
+    height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(26px, 4vw, 34px);
+    line-height:1.15;
+    margin-bottom:16px;
+  }
+  h1 em{font-style:italic;color:var(--teal);}
+
+  p.sub{
+    color:var(--ink-soft);
+    max-width:40ch;
+    margin:0 auto 32px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    font-weight:500;
+    transition:background .2s ease;
+  }
+  .btn:hover{background:var(--teal-deep);}
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="checkmark">✓</div>
+    <div class="eyebrow">Review Received</div>
+    <h1>Thank you for your <em>feedback.</em></h1>
+    <p class="sub">Your review has been submitted and is pending a quick check before it goes live on the site. I really appreciate you taking the time.</p>
+    <a href="index.html" class="btn">← Back to homepage</a>
+  </div>
+
+</body>
+</html>
