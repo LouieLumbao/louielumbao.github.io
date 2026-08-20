@@ -1,27 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://www.google.com/recaptcha/api.js?render=6LcG6Y4tAAAAAKR-pib-F8e3Jsjx5WaXcIyGfzbr"></script>
-  <meta charset="UTF-8">
-  <title>Leave a Review</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review — Ms. Louie Lumbao</title>
+<script src="https://www.google.com/recaptcha/api.js?render=6LcG6Y4tAAAAAKR-pib-F8e3Jsjx5WaXcIyGfzbr"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --ink-soft:#4A5568;
+    --paper:#F6F5F1;
+    --paper-raised:#FFFFFF;
+    --teal:#2F6F62;
+    --teal-deep:#1E4A41;
+    --gold:#B8912B;
+    --line:#DAD7CD;
+    --radius:2px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  a{color:inherit;}
+
+  header.nav{
+    background:rgba(246,245,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:640px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.02em;
+  }
+  .mark span{color:var(--teal);}
+  .nav-inner a.back{
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .nav-inner a.back:hover{
+    color:var(--teal-deep);
+    border-color:var(--teal);
+  }
+
+  main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:64px 24px;
+  }
+
+  .form-wrap{
+    width:100%;
+    max-width:520px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;
+    height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(28px, 4vw, 38px);
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  h1 em{font-style:italic;color:var(--teal);}
+
+  .form-sub{
+    color:var(--ink-soft);
+    max-width:48ch;
+    margin-bottom:36px;
+  }
+
+  form{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    display:block;
+  }
+
+  input[type="text"],
+  textarea{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    transition:border-color .2s ease;
+  }
+  input[type="text"]:focus,
+  textarea:focus{
+    outline:none;
+    border-color:var(--teal);
+  }
+  textarea{
+    resize:vertical;
+    min-height:120px;
+  }
+
+  button{
+    align-self:flex-start;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    border-radius:var(--radius);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    letter-spacing:0.02em;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  button:hover{background:var(--teal-deep);}
+  button:disabled{
+    background:var(--line);
+    color:var(--ink-soft);
+    cursor:not-allowed;
+  }
+
+  #status{
+    margin-top:18px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  #status.error{color:#B3261E;}
+</style>
 </head>
 <body>
-  <h1>Leave Me a Feedback</h1>
-  <form id="feedback-form">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <textarea id="feedback" placeholder="Your Review" required></textarea>
-    <button type="submit">Submit Review</button>
-  </form>
-  <p id="status"></p>
 
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp }
-      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<header class="nav">
+  <div class="nav-inner">
+    <div class="mark">Ms. Louie <span>Lumbao</span></div>
+    <a href="index.html" class="back">← Back to site</a>
+  </div>
+</header>
 
-    const firebaseConfig = {
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<main>
+  <div class="form-wrap">
+    <div class="eyebrow">Client Feedback</div>
+    <h1>Leave me a <em>review.</em></h1>
+    <p class="form-sub">Working together on something? I'd love to hear how it went. Your review helps future clients know what to expect.</p>
+
+    <form id="feedback-form">
+      <div>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="e.g. Jane Cruz" required>
+      </div>
+      <div>
+        <label for="feedback">Your Review</label>
+        <textarea id="feedback" placeholder="Tell me about your experience working together..." required></textarea>
+      </div>
+      <button type="submit" id="submit-btn">Submit Review →</button>
+      <p id="status"></p>
+    </form>
+  </div>
+</main>
+
+<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDAznWF4QEsb1jq_CZnGZPAWSqogPFiiP4",
   authDomain: "louie-portfolio-reviews.firebaseapp.com",
@@ -32,35 +240,45 @@ const firebaseConfig = {
   measurementId: "G-ZWWECRQ6FJ"
 };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-document.getElementById("feedback-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const token = await grecaptcha.execute("6LcG6Y4tAAAAAKR-pib-F8e3Jsjx5WaXcIyGfzbr", { action: "submit_review" });
-  
-  const name = document.getElementById("name").value.trim();
-  const feedback = document.getElementById("feedback").value.trim();
+  const form = document.getElementById("feedback-form");
+  const submitBtn = document.getElementById("submit-btn");
   const status = document.getElementById("status");
 
-  try {
-    // TODO: Send token to your backend for verification
-    // For now, this is just a soft deterrent
-    
-    await addDoc(collection(db, "reviews"), {
-      name,
-      feedback,
-      approved: false,
-      createdAt: serverTimestamp()
-    });
-    status.textContent = "Thank you! Your review has been submitted.";
-    e.target.reset();
-  } catch (err) {
-    status.textContent = "Something went wrong. Please try again.";
-    console.error(err);
-  }
-});
-  </script>
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+    status.className = "";
+    status.textContent = "";
+
+    try {
+      const token = await grecaptcha.execute("6LcG6Y4tAAAAAKR-pib-F8e3Jsjx5WaXcIyGfzbr", { action: "submit_review" });
+      // TODO: Send token to your backend for verification (soft deterrent for now)
+
+      const name = document.getElementById("name").value.trim();
+      const feedback = document.getElementById("feedback").value.trim();
+
+      await addDoc(collection(db, "reviews"), {
+        name,
+        feedback,
+        approved: false,
+        createdAt: serverTimestamp()
+      });
+
+      // Redirect to the thank-you landing page on success
+      window.location.href = "thank-you.html";
+    } catch (err) {
+      status.textContent = "Something went wrong. Please try again.";
+      status.className = "error";
+      console.error(err);
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Review →";
+    }
+  });
+</script>
+
 </body>
 </html>
